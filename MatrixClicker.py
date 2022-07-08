@@ -17,11 +17,12 @@ scorenum = "0"
 spacetime = "0"
 
 sc = pygame.display.set_mode((sch, scw))
-pygame.display.set_caption("Matrix Clicker")
+pygame.display.set_caption("Matrix Clicker: The Matrix")
 clock = pygame.time.Clock()
 
 green = (0, 255, 0)
 black = (0, 0, 0)
+magenta = (255, 0, 255)
 red = (255, 0, 0)
 yellow = (255, 255, 0)
 w = 50
@@ -90,7 +91,7 @@ while True:
 
               spt = fspt.render("SPACETIME: " + txtspacetime, 100, coloract)
               sc.blit(spt, (270, 90))
-              pygame.draw.rect(sc, colorpas, [270, 90, 800, 100], 1000000)
+              invisblock = pygame.draw.rect(sc, magenta, [270, 90, 800, 100], 1000000)
               spt = fspt.render("SPACETIME: " + txtspacetime, 100, coloract)
               sc.blit(spt, (270, 90))
 
@@ -102,8 +103,20 @@ while True:
                 pygame.draw.rect(sc, red, [0, 300, 960, 50], 1000000)
                 error = errorf.render("AN ERROR IN THE MATRIX!", 50, yellow)
                 sc.blit(error, (0, 300))
+              if spacetime >= 1801 and invisblock.collidepoint(pos):
+                pygame.init()
+
+                hell = pygame.display.set_mode((sch, scw))
+                pygame.display.set_caption("Matrix Clicker: The Hell")
+                clock = pygame.time.Clock()
+
               if spacetime >= 2001:
                 pygame.quit()
+                sys.exit()
+
+                pygame.display.update()
+                if event.type == pygame.QUIT:
+                  pygame.quit()
               spacetime = int(txtspacetime)
               spacetime = scorenum + 1
             if scorenum >= 501:
